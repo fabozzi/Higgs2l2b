@@ -20,32 +20,11 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 100
 ########### global tag ############################
 #from CMGTools.Common.Tools.getGlobalTag import getGlobalTag
 #process.GlobalTag.globaltag = cms.string(getGlobalTag(runOnMC))
-# OLD 
-#process.GlobalTag.globaltag = 'GR_R_52_V9B::All'
+# global tag for 2012A/B/C/D Winter13 re-reco (= 22Jan2013 re-reco)  
+process.GlobalTag.globaltag = 'FT_53_V21_AN5::All'
 
-# global tag for 2012A / B prompt reco (5_2)
-#process.GlobalTag.globaltag = 'GR_P_V39_AN1::All'
-# global tag for 2012 A / B re-reco data (5_3) - July13
-process.GlobalTag.globaltag = 'FT_53_V6_AN2::All'
-# global tag for 2012 A / B re-reco data (5_3) - Aug06
-#process.GlobalTag.globaltag = 'FT_53_V6C_AN2::All'
-# global tag for 2012 C re-reco data (5_3)
-#process.GlobalTag.globaltag = 'FT_53_V10_AN2::All'
-# global tag for 2012C prompt reco (5_3)
-#process.GlobalTag.globaltag = 'GR_P_V41_AN2::All'
+# The default Jet Probability calibration is good for 53x reprocessed Data from 22Jan2013
 
-#For 53x Data and MC, the default Jet Probability Calibration from the
-#GlobalTag is not optimal and needs to be replaced in the following way,
-#when using CRAB:
-
-process.GlobalTag.toGet = cms.VPSet(
-    cms.PSet(record = cms.string("BTagTrackProbability2DRcd"),
-             tag = cms.string("TrackProbabilityCalibration_2D_Data53X_v2"),
-             connect = cms.untracked.string("frontier://FrontierPrep/CMS_COND_BTAU")),
-    cms.PSet(record = cms.string("BTagTrackProbability3DRcd"),
-             tag = cms.string("TrackProbabilityCalibration_3D_Data53X_v2"),
-             connect = cms.untracked.string("frontier://FrontierPrep/CMS_COND_BTAU"))
-    )
 
 ##################################################
 
