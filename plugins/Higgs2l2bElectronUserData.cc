@@ -25,14 +25,14 @@ public:
 private:
   void produce( edm::Event &, const edm::EventSetup & );
   InputTag src_, rho_, primaryVertices_;
-  const float R03;
+  //  const float R03;
 };
 
 Higgs2l2bElectronUserData::Higgs2l2bElectronUserData( const ParameterSet & cfg ):
   src_( cfg.getParameter<InputTag>("src") ),
   rho_( cfg.getParameter<edm::InputTag>("rho")),
-  primaryVertices_(cfg.getParameter<InputTag>("primaryVertices")),
-  R03(0.3)
+  primaryVertices_(cfg.getParameter<InputTag>("primaryVertices"))//,
+						    //  R03(0.3)
 {
   produces<std::vector<pat::Electron> >();
 }
@@ -46,7 +46,7 @@ void Higgs2l2bElectronUserData::produce( Event & evt, const EventSetup & ) {
   evt.getByLabel(rho_,rhoHandle);
 
   double rho = *rhoHandle; 
-  float PUEnergyInCone = (TMath::Pi()) * R03 * R03 * rho;  
+  //  float PUEnergyInCone = (TMath::Pi()) * R03 * R03 * rho;  
 
   Handle<reco::VertexCollection> primaryVertices;  // Collection of primary Vertices
   evt.getByLabel(primaryVertices_, primaryVertices);
@@ -69,14 +69,14 @@ void Higgs2l2bElectronUserData::produce( Event & evt, const EventSetup & ) {
     elHLTSize>0 ? elHLTBit = 1 : elHLTBit = 0;  
     el.addUserFloat("elHLTBit", elHLTBit);
 
-    float absCombIsoPUCorrected = -1.0;
-    if( el.isEB() )
-      // pedestal subtraction for barrel 
-      absCombIsoPUCorrected = el.dr03TkSumPt() + max(0., el.dr03EcalRecHitSumEt() - 1.) + el.dr03HcalTowerSumEt() - PUEnergyInCone;
-    else
-      absCombIsoPUCorrected = el.dr03TkSumPt() + el.dr03EcalRecHitSumEt() + el.dr03HcalTowerSumEt() - PUEnergyInCone;
-
-    el.addUserFloat("absCombIsoPUCorrected", absCombIsoPUCorrected);
+    //    float absCombIsoPUCorrected = -1.0;
+    //    if( el.isEB() )
+    //      // pedestal subtraction for barrel 
+    //      absCombIsoPUCorrected = el.dr03TkSumPt() + max(0., el.dr03EcalRecHitSumEt() - 1.) + el.dr03HcalTowerSumEt() - PUEnergyInCone;
+    //    else
+    //      absCombIsoPUCorrected = el.dr03TkSumPt() + el.dr03EcalRecHitSumEt() + el.dr03HcalTowerSumEt() - PUEnergyInCone;
+    //
+    //    el.addUserFloat("absCombIsoPUCorrected", absCombIsoPUCorrected);
 
     float dzVtx(-1000.0);
     float dxyVtx(-1000.0);

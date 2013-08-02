@@ -16,32 +16,33 @@ public:
 private:
   void produce( edm::Event &, const edm::EventSetup & );
   edm::InputTag rhoAll_;
-  edm::InputTag rhoRestricted_;
+  //  edm::InputTag rhoRestricted_;
 
 };
 
 EventRhoDumper::EventRhoDumper( const ParameterSet & cfg ) : 
-  rhoAll_(cfg.getParameter<InputTag>("rho")),
-  rhoRestricted_(cfg.getParameter<InputTag>("restrictedRho")) {
+  rhoAll_(cfg.getParameter<InputTag>("rho"))//,
+  //  rhoRestricted_(cfg.getParameter<InputTag>("restrictedRho")) 
+{
   produces<float>( "rhoAllEta" ).setBranchAlias( "rhoAllEta" );
-  produces<float>( "rhoRestrictedEta" ).setBranchAlias( "rhoRestrictedEta" );
+  //  produces<float>( "rhoRestrictedEta" ).setBranchAlias( "rhoRestrictedEta" );
 }
 
 void EventRhoDumper::produce( Event & evt, const EventSetup & ) {
   edm::Handle<double> rhoAll;
   evt.getByLabel(rhoAll_, rhoAll);
-  edm::Handle<double> rhoRestricted;
-  evt.getByLabel(rhoRestricted_, rhoRestricted);
+  //  edm::Handle<double> rhoRestricted;
+  //  evt.getByLabel(rhoRestricted_, rhoRestricted);
 
 
   auto_ptr<float> rhoVariable( new float );
-  auto_ptr<float> rhoVariableRestricted( new float );
+  //  auto_ptr<float> rhoVariableRestricted( new float );
 
   *rhoVariable = float(*rhoAll);
-  *rhoVariableRestricted = float(*rhoRestricted);
+  //  *rhoVariableRestricted = float(*rhoRestricted);
 
   evt.put( rhoVariable, "rhoAllEta" );
-  evt.put( rhoVariableRestricted, "rhoRestrictedEta" );
+  //  evt.put( rhoVariableRestricted, "rhoRestrictedEta" );
 
 }
 

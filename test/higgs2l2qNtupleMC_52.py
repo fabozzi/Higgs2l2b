@@ -47,8 +47,8 @@ process.PUInfoNtuple = cms.EDProducer(
 
 # Event rho dumper
 process.rhoDumper = cms.EDProducer("EventRhoDumper",
-                                    rho = cms.InputTag("kt6PFJets:rho"),
-                                    restrictedRho = cms.InputTag("kt6PFJetsForIso:rho")
+                                    rho = cms.InputTag("kt6PFJets:rho")
+#                                    restrictedRho = cms.InputTag("kt6PFJetsForIso:rho")
                                     )
 
 # Met variables producer

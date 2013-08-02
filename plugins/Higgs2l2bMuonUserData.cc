@@ -22,15 +22,15 @@ public:
 
 private:
   void produce( edm::Event &, const edm::EventSetup & );
-  InputTag src_, rho_, primaryVertices_;
-  const float R03;
+  InputTag src_, primaryVertices_;
+  //  const float R03;
 };
 
 Higgs2l2bMuonUserData::Higgs2l2bMuonUserData( const ParameterSet & cfg ):
   src_( cfg.getParameter<InputTag>("src") ),
-  rho_( cfg.getParameter<edm::InputTag>("rho")),
-  primaryVertices_(cfg.getParameter<InputTag>("primaryVertices")),
-  R03(0.3)
+  //  rho_( cfg.getParameter<edm::InputTag>("rho")),
+  primaryVertices_(cfg.getParameter<InputTag>("primaryVertices"))//,
+  //  R03(0.3)
 {
   produces<std::vector<pat::Muon> >();
 }
@@ -40,11 +40,11 @@ void Higgs2l2bMuonUserData::produce( Event & evt, const EventSetup & ) {
   Handle<vector<pat::Muon>  > muons;
   evt.getByLabel(src_,muons);
 
-  Handle<double> rhoHandle;
-  evt.getByLabel(rho_,rhoHandle);
+  //  Handle<double> rhoHandle;
+  //  evt.getByLabel(rho_,rhoHandle);
 
-  double rho = *rhoHandle; 
-  float PUEnergyInCone = (TMath::Pi()) * R03 * R03 * rho;  
+  //  double rho = *rhoHandle; 
+  //  float PUEnergyInCone = (TMath::Pi()) * R03 * R03 * rho;  
 
   Handle<reco::VertexCollection> primaryVertices;  // Collection of primary Vertices
   evt.getByLabel(primaryVertices_, primaryVertices);
@@ -61,8 +61,8 @@ void Higgs2l2bMuonUserData::produce( Event & evt, const EventSetup & ) {
     m.addUserFloat("muHLTBit", muHLTBit);
 
 
-    float absCombIsoPUCorrected = m.trackIso() + m.caloIso() - PUEnergyInCone;
-    m.addUserFloat("absCombIsoPUCorrected", absCombIsoPUCorrected);
+    //    float absCombIsoPUCorrected = m.trackIso() + m.caloIso() - PUEnergyInCone;
+    //    m.addUserFloat("absCombIsoPUCorrected", absCombIsoPUCorrected);
 
     float dzVtx(-1000.0);
     if( m.innerTrack().isNonnull() )

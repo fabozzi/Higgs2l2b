@@ -65,21 +65,6 @@ from PhysicsTools.PatAlgos.tools.coreTools import *
 
 from PhysicsTools.PatAlgos.tools.pfTools import *
 
-# ---------------- rho calculation for JEC ----------------------
-
-from RecoJets.JetProducers.kt4PFJets_cfi import kt4PFJets
-
-process.kt6PFJets = kt4PFJets.clone(
-    rParam = cms.double(0.6),
-    doAreaFastjet = cms.bool(True),
-    doRhoFastjet = cms.bool(True),
-)
-
-#compute rho correction for lepton isolation
-process.kt6PFJetsForIso = process.kt6PFJets.clone(
-    Rho_EtaMax = cms.double(2.5),
-    Ghost_EtaMax = cms.double(2.5) )
-
 # ---------------- Sequence AK5 ----------------------
 postfixAK5 ="AK5"
 jetAlgoAK5 ="AK5"
@@ -316,7 +301,7 @@ process.stdLeptonSequence = cms.Sequence(
 process.userDataSelectedElectrons = cms.EDProducer(
     "Higgs2l2bElectronUserData",
     src = cms.InputTag("selectedPatElectrons"),
-    rho = cms.InputTag("kt6PFJetsForIso:rho"),
+    rho = cms.InputTag("kt6PFJets:rho"),
     primaryVertices=cms.InputTag("offlinePrimaryVertices")
 )
 
@@ -333,7 +318,6 @@ process.selectedIsoElectrons = cms.EDFilter(
 process.userDataSelectedMuons = cms.EDProducer(
     "Higgs2l2bMuonUserData",
     src = cms.InputTag("selectedPatMuons"),
-    rho = cms.InputTag("kt6PFJetsForIso:rho"),
     primaryVertices=cms.InputTag("offlinePrimaryVertices")
 )
 
@@ -408,18 +392,12 @@ process.postPathCounter = cms.EDProducer("EventCountProducer")
 
 process.p = cms.Path( process.prePathCounter )
 
-#process.p += process.kt6PFJets
-
 # PFBRECO+PAT ---
 
 # used by metsignificance module
 process.p += process.pfNoJet
 
 process.p += getattr(process,"patPF2PATSequence"+postfixAK5)
-
-#process.p += process.kt6PFJetsCHS
-process.p += process.kt6PFJetsForIso
-#process.p += process.kt6PFJetsCHSForIso
 
 #process.p += process.qglAK5PF 
 process.p += process.customPFJetsNoPUSub
