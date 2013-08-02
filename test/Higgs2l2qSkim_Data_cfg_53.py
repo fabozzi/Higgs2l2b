@@ -44,9 +44,8 @@ print sep_line
 ### INPUT COLLECTIONS ##########
 
 process.source.fileNames = [
-#    'file:/data3/scratch/cms/data/Run2012A/DoubleMu/190782/723EF864-8584-E111-A833-003048CFB40C.root'
-#    'file:/data3/scratch/cms/data/HZZ-13Jul2012-v3/DoubleMu/00165893-CED3-E111-9C00-00259073E4C4.root'
-    'file:/data3/scratch/cms/data/DoubleEl/Run2012B-13Jul2012-v1/193834/20F562E7-92D4-E111-9BE1-00261894398A.root'
+#    'file:/data3/scratch/cms/data/HZZ-22Jan2013-v1/Run2012C/DoubleElectron/00089696-9268-E211-94CA-003048678B38.root'
+    'file:/data3/scratch/cms/data/HZZ-22Jan2013-v1/Run2012C/DoubleMuParked/FE470A6B-C766-E211-A29E-00259073E450.root'
 ]
 
 ### DEFINITION OF THE PFBRECO+PAT SEQUENCES ##########
