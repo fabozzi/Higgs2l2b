@@ -529,7 +529,9 @@ process.fullPath = cms.Schedule(
     process.HBHENoiseFilterPath,
     process.eeBadScFilterPath,
     process.primaryVertexFilterPath,
-    process.noscrapingFilterPath
+    process.noscrapingFilterPath,
+    process.ecalLaserFilterPath,
+    process.trkPOGFiltersPath
     )
 
 #this is needed only for Madgraph MC:
